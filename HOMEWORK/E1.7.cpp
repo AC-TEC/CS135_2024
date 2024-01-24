@@ -42,7 +42,7 @@ OTHER WAY I HAD
         std::cout << names[i] << std::endl;
     }
 */
-//JI
+//J
     return 0;
 }
 
