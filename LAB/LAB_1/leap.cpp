@@ -4,7 +4,7 @@ Course: CSCI-135
 Instructor: Tong Yi
 Assignment: LAB 1
 DATE: 1/24/2024
-,.
+
 Task C: print out if input year is a leap or common year
 
 */
