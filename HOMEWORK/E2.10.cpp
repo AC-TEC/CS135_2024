@@ -17,7 +17,7 @@ int main(){
     //using double bc cost per gallon can be given in cents(decimals)
     int gallons_of_gas;
     double gas_price_per_gallon;
-    double fuel_efficiency;
+    int fuel_efficiency; //mpg
 
     //ask user for # of gallons,gas price, & fuel efficiency
     std::cout << "Number of gallons in the tank: ";
