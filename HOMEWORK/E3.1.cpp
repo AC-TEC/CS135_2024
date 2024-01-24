@@ -27,5 +27,11 @@ int main(){
         std::cout << "Zero" << std::endl;
     }
 
+    //Other way (TERANY OPERATOR)
+    //nested terany operation
+                           //(condition) ? (expression_if_true) : (expression if false)
+    std::string determine = ((num > 0) ? ("Positive") : ((num < 0) ? "Negative" : "Zero"));
+    std::cout << determine << std::endl;
+
     return 0;
 }
