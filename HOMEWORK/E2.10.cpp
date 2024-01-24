@@ -14,8 +14,8 @@ print cost per 100 miles and how far car can go with gas in tank
 
 int main(){
     //initialize variables
-    //using double bc cost per gallon can end up being in cents(decimals)
-    double gallons_of_gas;
+    //using double bc cost per gallon can be given in cents(decimals)
+    int gallons_of_gas;
     double gas_price_per_gallon;
     double fuel_efficiency;
 
@@ -35,7 +35,7 @@ int main(){
     //calculate cost per miles and range of car with the gas in the tank
     //cost_per_miles = gas_price_per_gallon / fuel_efficiency;
 
-    double cost_per_100_miles = gas_price_per_gallon / 100;
+    double cost_per_100_miles = ((gas_price_per_gallon / fuel_efficiency) * 100);
     double range = gallons_of_gas * fuel_efficiency;
 
     //print info
