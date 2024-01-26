@@ -34,6 +34,5 @@ int main(){
         std::cout << "Neither" << std::endl;
     }
 
-//something 
     return 0;
 }
