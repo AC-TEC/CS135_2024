@@ -35,6 +35,6 @@ int main(){
 
     //print out sum
     std::cout << "SUM: " << sum << std::endl;
-    
+
     return 0;
 }
