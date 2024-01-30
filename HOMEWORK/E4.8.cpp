@@ -3,7 +3,7 @@ Author: Andy Cocha
 Course: CSCI-135
 Instructor: Tong Yi
 Assignment: E4.8
-DATE: 1/26/2024
+DATE: 1/29/2024
 
 Hw: reads a word and prints each character on a separate line
 */
