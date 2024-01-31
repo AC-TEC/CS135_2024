@@ -49,6 +49,7 @@ int main(){
         if(date == user_date){
             std::cout << "East basin storage: " << eastSt << " billion gallons" << std::endl;
         }
+
     }
 
     //close file
