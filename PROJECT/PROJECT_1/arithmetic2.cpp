@@ -31,14 +31,16 @@ int main(){
     //track the number of times user gets question correct(use to calculate percentage)
     double correct = 0; //double so i can be able to get decimal for calculating percentage 
 
+
+    //seed random number generator with current time
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+
     //repeat the code below the amount of times the user inputs for num_of_questions
     for(int i = 0; i < num_of_questions; i++){
         
         //char array to hold the operations
         char operations[] = {'+','-','*','/','%'};
-
-        //seed random number generator with current time
-        srand(static_cast<unsigned int>(time(nullptr)));
 
         //store random index for operations array range: [0,4]
         int random_index = rand() % 5;
@@ -61,7 +63,7 @@ int main(){
 
         //perform the operations and save the result
         std::string ep; //stores the expression as a string for outputting purposes
-        int result;
+        int result; 
     
         switch (expression_operation) {
             case '+' :
@@ -99,7 +101,7 @@ int main(){
 
 
         //get user response
-        int response;
+        int response; 
         std::cout << "what is " << ep << "? ";
         std::cin >> response;
 
@@ -108,16 +110,16 @@ int main(){
         //check if user response is correct
         if(response == result){
             std::cout << "true" << std::endl;
+            std::cout << std::endl;
             correct ++; //add to tracker
         } else {
             std::cout << "false" << std::endl;
+            std::cout << std::endl;
         }
 
 
     }//end of for loop
 
-    //space for separation
-    std::cout << std::endl;
 
     //calculate the percentage
     double percent_correct = ((correct/num_of_questions) * 100);
@@ -126,28 +128,49 @@ int main(){
     std::cout << "percentage correct: " << percent_correct << "%" << std::endl;
 
 
+    char grade;
+    if (percent_correct >= 90) {
+        grade = 'A';
+    } else if (percent_correct >= 80) {
+        grade = 'B';
+    } else if (percent_correct >= 70) {
+        grade = 'C';
+    } else if (percent_correct >= 60) {
+        grade = 'D';
+    } else {
+        grade = 'F';
+    }
+
+    std::cout << "letter grade: " << grade << std::endl;
+
+
+
+
+/*
     //array of letter grade characters
-    char grades[] = { 'A', 'B', 'C', 'D', 'F' };
+    char grades[] = {'A','B','C','D','F'};
 
     //give letter grades based on percentage
     if(percent_correct >= 90){
         //letter grade: A
-        std::cout << "letter grade: " << grades[0] << std::endl;
+        std::cout << "letter grade: " << grades[0];
 
-    } else if(percent_correct < 90 && percent_correct >= 80){
+    } else if(percent_correct >= 80 && percent_correct < 90){
         //letter grade: B
-        std::cout << "letter grade: " << grades[1] << std::endl;
+        std::cout << "letter grade: " << grades[1];
 
-    }else if(percent_correct < 80 && percent_correct >= 70){
+    }else if(percent_correct >= 70 && percent_correct < 80){
         //letter grade: C
-        std::cout << "letter grade: " << grades[2] << std::endl;
+        std::cout << "letter grade: " << grades[2];
 
-    } else if(percent_correct < 70 && percent_correct >= 60) {
+    } else if(percent_correct >= 60 && percent_correct < 70) {
         //letter grade: D
-        std::cout << "letter grade: " << grades[3] << std::endl;
+        std::cout << "letter grade: " << grades[3];
     } else {
         //letter grade: F
-        std::cout << "letter grade: " << grades[4] << std::endl;
+        std::cout << "letter grade: " << grades[4];
     }
+*/
+
 
 }
