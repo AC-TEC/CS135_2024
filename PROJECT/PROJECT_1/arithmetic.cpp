@@ -1,4 +1,3 @@
-
 //Author: Andy Cocha
 //Course: CSCI-135
 //Instructor: Tong Yi
@@ -34,7 +33,7 @@ int main(){
 
     //if operation is '/' or '%' 2nd random integer range:[1,9] else range: [0,9]
     if(expression_operation == '/' || expression_operation == '%'){
-        second_operand = rand() % 10 + 1; //[1,9]
+        second_operand = rand() % 9 + 1; //[1,9]
     } else {
         second_operand = rand() % 10; //[0,9]
     }
