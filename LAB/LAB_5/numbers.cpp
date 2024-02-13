@@ -5,7 +5,8 @@ Instructor: Tong Yi
 Assignment: LAB 5
 DATE: 2/13/2024
 
-Task D: write a function that return the amount of primes in the interval a to b.
+Task E: make a function that returns true or false depending on whether n is a primer number and if n-2 or n+2(or both of them) 
+        is a prime number. If it is then n is a twin prime else not a twin prime
 */
 #include <iostream>
 
@@ -85,21 +86,34 @@ int countPrimes(int a, int b){
 }
 
 
+
+//TASK E
+bool isTwinPrime(int n){
+    //if n is a prime number and either n-2 or n+2 is a prime number then return true else return false
+    if(isPrime(n) == true && (isPrime(n-2) == true || isPrime(n+2) == true)){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+
 int main(){
-    int starting_number;
-    int end_number;
+    int number;
 
     //get user input
-    std::cout << "Enter starting number: ";
-    std::cin >> starting_number;
-    std::cout << "Enter end number: ";
-    std::cin >> end_number;
+    std::cout << "Enter number: ";
+    std::cin >> number;
 
     //call function
-    int number_of_primes = countPrimes(starting_number,end_number);
+    bool twin_prime = isTwinPrime(number);
 
-    //print out result
-    std::cout << "Number of primes numbers in interval: " << number_of_primes << std::endl;
+    //print result
+    if(twin_prime == 1){
+        std::cout << "True" << std::endl;
+    }else{
+        std::cout << "False" << std::endl;
+    }
 
     return 0;
 }
@@ -164,6 +178,7 @@ TASK B MAIN FUNCTION BELOW:
 */
 
 
+
 /*
 TASK C MAIN FUNCTION BELOW:
 
@@ -183,6 +198,29 @@ int main(){
 
     return 0;
 }
-
-
 */
+
+
+/*
+TASK D MAIN FUNCTION BELOW:
+
+int main(){
+    int starting_number;
+    int end_number;
+
+    //get user input
+    std::cout << "Enter starting number: ";
+    std::cin >> starting_number;
+    std::cout << "Enter end number: ";
+    std::cin >> end_number;
+
+    //call function
+    int number_of_primes = countPrimes(starting_number,end_number);
+
+    //print out result
+    std::cout << "Number of primes numbers in interval: " << number_of_primes << std::endl;
+
+    return 0;
+}
+*/
+
