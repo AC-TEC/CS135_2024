@@ -5,7 +5,7 @@ Instructor: Tong Yi
 Assignment: LAB 5
 DATE: 2/13/2024
 
-Task C: make a function that returns the next prime number.
+Task D: write a function that return the amount of primes in the interval a to b.
 */
 #include <iostream>
 
@@ -65,9 +65,43 @@ int nextPrime(int n){
 
 
 
+
+//TASK D
+int countPrimes(int a, int b){
+    //counter to keep track of prime numbers
+    int prime_numbers = 0;
+
+    //iterate from point a to b
+    for(int i = a; i <= b; i++){
+        //check if number is prime. if it is increase counter
+        if(isPrime(i)){
+            prime_numbers++;
+        }
+    }
+
+    //return amount of primes found in range a-b
+    return prime_numbers;
+
+}
+
+
 int main(){
+    int starting_number;
+    int end_number;
 
+    //get user input
+    std::cout << "Enter starting number: ";
+    std::cin >> starting_number;
+    std::cout << "Enter end number: ";
+    std::cin >> end_number;
 
+    //call function
+    int number_of_primes = countPrimes(starting_number,end_number);
+
+    //print out result
+    std::cout << "Number of primes numbers in interval: " << number_of_primes << std::endl;
+
+    return 0;
 }
 
 
