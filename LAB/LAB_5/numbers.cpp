@@ -5,8 +5,7 @@ Instructor: Tong Yi
 Assignment: LAB 5
 DATE: 2/13/2024
 
-Task E: make a function that returns true or false depending on whether n is a primer number and if n-2 or n+2(or both of them) 
-        is a prime number. If it is then n is a twin prime else not a twin prime
+Task F: make a function that returns the smallest twin prime greater than n
 */
 #include <iostream>
 
@@ -98,6 +97,22 @@ bool isTwinPrime(int n){
 }
 
 
+
+//TASK F
+int nextTwinPrime(int n){
+    //start at a number greater than n
+    int starting_point = n+1;
+
+    //if number is not a twin prime then increase starting_point to next number
+    while(isTwinPrime(starting_point) == false){
+        starting_point++;
+    }
+
+    //returns the smallest twin prime greater than n
+    return starting_point;
+}
+
+
 int main(){
     int number;
 
@@ -106,16 +121,10 @@ int main(){
     std::cin >> number;
 
     //call function
-    bool twin_prime = isTwinPrime(number);
+    int twin_prime = nextTwinPrime(number);
 
     //print result
-    if(twin_prime == 1){
-        std::cout << "True" << std::endl;
-    }else{
-        std::cout << "False" << std::endl;
-    }
-
-    return 0;
+    std::cout << "NEXT SMALLEST TWIN PRIME: " << twin_prime << std::endl;
 }
 
 
@@ -224,3 +233,32 @@ int main(){
 }
 */
 
+
+/*
+
+TASK E MAIN FUNCTION BELOW:
+
+
+int main(){
+    int number;
+
+    //get user input
+    std::cout << "Enter number: ";
+    std::cin >> number;
+
+    //call function
+    bool twin_prime = isTwinPrime(number);
+
+    //print result
+    if(twin_prime == 1){
+        std::cout << "True" << std::endl;
+    }else{
+        std::cout << "False" << std::endl;
+    }
+
+    return 0;
+}
+
+
+
+*/
