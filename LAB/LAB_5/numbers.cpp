@@ -5,7 +5,8 @@ Instructor: Tong Yi
 Assignment: LAB 5
 DATE: 2/13/2024
 
-Task F: make a function that returns the smallest twin prime greater than n
+Task G: make a function that returns the largest twin prime in the interval [a,b].
+        if there is no twin primes in range then return -1.
 */
 #include <iostream>
 
@@ -113,19 +114,53 @@ int nextTwinPrime(int n){
 }
 
 
+
+
+//TASK G
+int largestTwinPrime(int a, int b){
+    //tracker to keep largest twin prime
+    //if no twin primes then it will stay at -1
+    int largest_number = -1;
+
+    //iterate through interval[a,b] from end to start
+    for(int i = b; i >= a; i--){
+        //check if current number is a twin prime
+        if(isTwinPrime(i)==true){
+            //update tracker and break out of loop since that will be the largest twin prime
+            largest_number = i;
+            break;
+        }
+    }
+    
+    //return the largest twin prime in range [a,b]
+    return largest_number;
+}
+
+
 int main(){
-    int number;
+    int starting_number;
+    int end_number;
 
     //get user input
-    std::cout << "Enter number: ";
-    std::cin >> number;
+    std::cout << "Enter starting number: ";
+    std::cin >> starting_number;
+    std::cout << "Enter end number: ";
+    std::cin >> end_number;
 
-    //call function
-    int twin_prime = nextTwinPrime(number);
+    //cal function
+    int largest_twin_prime = largestTwinPrime(starting_number,end_number);
 
     //print result
-    std::cout << "NEXT SMALLEST TWIN PRIME: " << twin_prime << std::endl;
+    std::cout << "Largest twin prime: " << largest_twin_prime << std::endl;
+    
+    return 0;
 }
+
+
+
+
+
+
 
 
 
@@ -259,6 +294,28 @@ int main(){
     return 0;
 }
 
+
+
+*/
+
+
+/*
+
+TASK F MAIN FUNCTION:
+
+int main(){
+    int number;
+
+    //get user input
+    std::cout << "Enter number: ";
+    std::cin >> number;
+
+    //call function
+    int twin_prime = nextTwinPrime(number);
+
+    //print result
+    std::cout << "NEXT SMALLEST TWIN PRIME: " << twin_prime << std::endl;
+}
 
 
 */
