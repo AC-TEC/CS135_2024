@@ -1,5 +1,5 @@
 /*
-Author: Andy Cocha
+Author: 
 Course: CSCI-135
 Instructor: Tong Yi
 Assignment: LAB 3
