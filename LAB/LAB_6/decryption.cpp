@@ -3,7 +3,7 @@ Author: Andy Cocha
 Course: CSCI-135
 Instructor: Tong Yi
 Assignment: LAB 6
-DATE: 2/20/2024
+DATE: 2/21/2024
 
 Task D: create two functions to decrypt a ceasar and vigenere cipher.
 */
@@ -92,7 +92,7 @@ std::string decryptCaesar(std::string ciphertext, int rshift){
 
 
 //Vigenere decryption
-std::string decryptVignere(std::string ciphertext, std::string keyword){
+std::string decryptVigenere(std::string ciphertext, std::string keyword){
 
     std::string plaintext = "";
     int keyIndex = 0;
@@ -134,7 +134,7 @@ int main(){
 //CAESAR CIPHER
 
     //get user input
-    std::cout << "Enter plaintex: ";
+    std::cout << "Enter plaintext: ";
     getline(std::cin, plaintext);
     std::cout << std::endl;
     
@@ -175,7 +175,7 @@ int main(){
 
     
     //call and print vigenere cipher decryption
-    std::string decryption_v = decryptVignere(vigenere_encryption, keyword);
+    std::string decryption_v = decryptVigenere(vigenere_encryption, keyword);
 
     //compare produced string with original string. if they match then print it else dont
     if(decryption_v == plaintext) {
