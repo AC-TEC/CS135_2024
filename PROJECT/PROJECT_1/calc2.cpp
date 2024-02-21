@@ -65,7 +65,7 @@ int main(){
             num_questions++; //add to questions counter
         }else{
             std::cout << "false" << std::endl;
-            num_questions++; //add to questions counter
+            num_questions++; //add to questions counter 
         }
     }
 
