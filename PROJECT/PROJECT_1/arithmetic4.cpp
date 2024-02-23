@@ -47,8 +47,15 @@ int main(){
     //?vector to hold the expressions so we can randomize them with random_index
     std::vector<std::string> expressions_storage;
 
-    //?variable to hold current random expression
-    //std::string random_expression;
+    //?vector to hold the csv given answers and use the same value that we got for the randomized expression as the index for csv given answers
+    //?which gets us the csv answer that matches that expression. EX: random_index = 3 -> use that as index to get the expression from the vector at index 3 and use that same random_index number to also get the csv given answer from the vector at index 3. which now solves the problem of not getting the answer that corresponds to the expression 
+    std::vector <double> csv_answers_storage;
+
+    //?variable to hold the current random expression
+    std::string random_expression;
+
+    //?variable to hold the current random answer
+    double random_answer;
 
     //will be used to store each line(row) from file
     std::string line;
@@ -70,6 +77,9 @@ int main(){
         //?add expressions to vector
         expressions_storage.push_back(csv_expression);
 
+        //?add csv_given_answers to vector
+        csv_answers_storage.push_back(csv_given_answer);
+
         //add to questions counter
         num_questions++;
     }
@@ -90,15 +100,19 @@ inside the for loop we can initialize the random_index variable and then also as
 
     for(int i = 0; i < num_questions; i++){
         //initialize random_index 
-        random_index = rand() % num_questions; 
+        random_index = rand() % num_questions;
+
+        //?initialize the random expression and random answer variables to the same generated index
+        random_expression = expressions_storage[random_index];
+        random_answer = csv_answers_storage[random_index];
 
         //print out the expression and get user input
-        std::cout << "What is " << expressions_storage[random_index] << "? ";
+        std::cout << "What is " << random_expression << "? ";
         std::cin >> result_of_expression;
 
 
         //if user input matches csv given answer, then print out true and add to counter else print false
-        if(result_of_expression == csv_given_answer){
+        if(result_of_expression == random_answer){
             std::cout << "true" << std::endl;
             correct++;
         }else{
