@@ -41,21 +41,27 @@ int main(){
     //?seed random number generator using current time (new code)
     srand(time(0));
 
+
     //?set random index for expressions 
-    int random_index; //= rand() % num_questions + 1; //[1,9]
+    int random_index; 
+
 
     //?vector to hold the expressions so we can randomize them with random_index
     std::vector<std::string> expressions_storage;
 
-    //?vector to hold the csv given answers and use the same value that we got for the randomized expression as the index for csv given answers
+
+    //?vector to hold the csv given answers and use the same index that we used to generate the random expression from the vector
     //?which gets us the csv answer that matches that expression. EX: random_index = 3 -> use that as index to get the expression from the vector at index 3 and use that same random_index number to also get the csv given answer from the vector at index 3. which now solves the problem of not getting the answer that corresponds to the expression 
     std::vector <double> csv_answers_storage;
+
 
     //?variable to hold the current random expression
     std::string random_expression;
 
+
     //?variable to hold the current random answer
     double random_answer;
+
 
     //will be used to store each line(row) from file
     std::string line;
@@ -69,7 +75,6 @@ int main(){
 
         //read the expression as a whole line until we reach the comma (delimiter: ',')
         std::getline(column, csv_expression, ',');
-
 
         //read the csv given answer 
         column >> csv_given_answer;
@@ -98,6 +103,8 @@ to keep on going until we reached the amount of questions in the csv file so for
 inside the for loop we can initialize the random_index variable and then also ask the questions and put the rest of the code inside it 
 */
 
+    //?To randomize the questions order until we have reached the amount of questions found in csv file. Essentially giving us the amount of questions found in csv file but each one is a random one found in csv file
+    //?EX: csv = 9 expressions. so for loop gonna iterate 9 times and give us 9 expressions in random order.
     for(int i = 0; i < num_questions; i++){
         //initialize random_index 
         random_index = rand() % num_questions;
@@ -110,8 +117,7 @@ inside the for loop we can initialize the random_index variable and then also as
         std::cout << "What is " << random_expression << "? ";
         std::cin >> result_of_expression;
 
-
-        //if user input matches csv given answer, then print out true and add to counter else print false
+        //if user input matches generated random_answer(csv given answer), then print out true and add to counter else print false
         if(result_of_expression == random_answer){
             std::cout << "true" << std::endl;
             correct++;
@@ -119,8 +125,7 @@ inside the for loop we can initialize the random_index variable and then also as
             std::cout << "false" << std::endl;
         }
     }
-    //close csv file
-    expressions_data.close();
+
 
 
     //calculate the percentage of correct answers
@@ -131,23 +136,20 @@ inside the for loop we can initialize the random_index variable and then also as
 
 
     //close csv file
-    //expressions_data.close();
+    expressions_data.close();
 
     return 0;
 }
 
 
 
-    //calculate the percentage of correct answers
-    //double percent_correct = ((correct / num_questions) * 100);
-
-    //print out percentage
-    //std::cout << "percentage correct: " << percent_correct << "%" << std::endl;
-
 
 
 
 /*
+
+!worked(UPDATED 2/23/2024)
+
 plan to generate a random expression from the csv file
 
     -seed random number generator
@@ -159,4 +161,26 @@ plan to generate a random expression from the csv file
     -then use random_index to get a random expression that is stored in the array or vector
 
 * I believe a vector would be best to use since we wont have to specify the size of it. since in the gradescope test we can see that the csv test files will have different amount of questions in them
+
+
+!worked(UPDATED 2/23/2024)
+*IDEA CAME TO ME WHILE GETTING OFF THE TRAIN ON MY WAY TO COLLEGE
+plan to generate the csv_given answer that corresponds to the generated random expression
+    -make a vector to store the csv_given_answer
+
+    -in the while loop that reads csv data keep on adding the csv_given_answer to the vector
+
+    -use the random_index to get the csv_given_answer that is stored in the vector which is the same one that also is used to get the expression that is stored in its own vector
+        essentially getting the correct answer for each randomly generated expression
+
+    
+
+*/
+
+
+/*
+PLAN TO STOP GENERATING QUESTIONS WHEN WE REACH CORRECT RATE OF 60% OR HIGHER
+
+    -
+
 */
