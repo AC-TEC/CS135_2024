@@ -14,6 +14,7 @@
 #include <sstream>  //for string stream
 #include <cstdlib>  //for close() function to close file at end and for rand()
 #include <vector>
+#include <ctime> // for the srand(time(0))
 
 int main(){
 
@@ -124,15 +125,40 @@ inside the for loop we can initialize the random_index variable and then also as
         }else{
             std::cout << "false" << std::endl;
         }
-    }
+        
+        
+        //calculate the percentage of correct answers
+        double percent_correct = ((correct / num_questions) * 100);
 
+        //check if percent_correct >= 60. If it is then print out statement and break from loop. else kepp on looping
+        //close csv file too since we wont loop through other questions anymore
+        if(percent_correct >= 60){
+            //separation line
+            std::cout << std::endl; 
 
+            std::cout << "At least 60% is correct. " << "Stop.";
+            break; 
+
+            //close csv file
+            //expressions_data.close();
+        }
+
+    }   
+    //following code will happen if correct_percentage remains < 60. will have looped through all questions
+
+    //serparation line
+    std::cout << std::endl; 
 
     //calculate the percentage of correct answers
     double percent_correct = ((correct / num_questions) * 100);
 
+    //check if percent_correct < 60. if it is then print out the percentage
+    //we do this if statement so that it doesnt also print out the percentage when correct_percent is >= 60 only when its less.
+    if(percent_correct < 60){
     //print out percentage
-    std::cout << "percentage correct: " << percent_correct << "%" << std::endl;
+    std::cout << "percentage correct: " << percent_correct << "%";
+    }
+
 
 
     //close csv file
@@ -181,6 +207,26 @@ plan to generate the csv_given answer that corresponds to the generated random e
 /*
 PLAN TO STOP GENERATING QUESTIONS WHEN WE REACH CORRECT RATE OF 60% OR HIGHER
 
-    -
+    -change for loop that generates the random expressions a do while loop
 
+    -make a counter and initialize to zero and keep on adding to it everytime we loop. so that we can stop once we reach the amount of questions found in csv file
+
+    -condition of do-while loop: counter < num_questions && stop once correct percentage reaches 60%. 
+
+
+
+
+-ohhhhhhhh yeah since the amount of questions is not in the same loop of the code that calulates the percentage we can now put the calculation of percentage in the loop and keep it going until we reach 60% or higher
+    so we can keep on calculating the percentage over and over again and if it reaches 60% we can use break to stop and end the loop
+
+
+    -move code to calculate percentage into for loop
+
+    -if statment to check if correct percentage is 60% or greater.
+
+    -if so print a statment saying we reached that correct rate
+
+    -use break to stop for loop.
+
+    -if dont reach that percentage loop is going to keep on going
 */
