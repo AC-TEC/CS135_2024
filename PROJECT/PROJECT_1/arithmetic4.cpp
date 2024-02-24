@@ -230,3 +230,11 @@ PLAN TO STOP GENERATING QUESTIONS WHEN WE REACH CORRECT RATE OF 60% OR HIGHER
 
     -if dont reach that percentage loop is going to keep on going
 */
+
+
+/*
+
+!I believe the reason why its not accepting on gradescope is bc when i print the expressions some keep on repeating. I believe that gradescope does not want any repeat randomly generated expressions.
+!so make an expression on appear once. no repeats. i believe if i do this then it might gert fixed. 2/23/2024 10:20pm
+
+*/
