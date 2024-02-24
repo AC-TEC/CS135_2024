@@ -8,6 +8,7 @@
 //        Stop if correct rate of 60% or higher is reached.
 
 
+
 #include <iostream>
 #include <string>
 #include <fstream>  //to read csv file
@@ -166,7 +167,6 @@ inside the for loop we can initialize the random_index variable and then also as
 
     return 0;
 }
-
 
 
 
