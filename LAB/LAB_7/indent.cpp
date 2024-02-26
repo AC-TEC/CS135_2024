@@ -8,3 +8,14 @@ DATE: 2/26/2024
 Task B:
 */
 
+#include <iostream>
+#include <string>
+
+int countChar(std::string line, char c){
+
+}
+
+
+int main(){
+    
+}
