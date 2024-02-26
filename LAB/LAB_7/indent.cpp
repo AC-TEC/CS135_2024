@@ -35,6 +35,7 @@ int main(){
 
     //go through each line
     while(getline(std::cin,line)){
+        //prints out character count and the line
         std::cout << countChar(line,'{') << " " << line << std::endl;
     }
 }
