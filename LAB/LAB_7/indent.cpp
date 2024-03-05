@@ -3,92 +3,66 @@ Author: Andy Cocha
 Course: CSCI-135
 Instructor: Tong Yi
 Assignment: LAB 7
-DATE: 2/26/2024
+DATE: 3/5/2024
 
-Task B:
+Task B: Program properly indents code according to open and closed curly brackets
 */
 
 #include <iostream>
 #include <string>
 
 //function to count how many times a character appears
-int countChar(std::string line, char c){
+int countChar(std::string line, char c) {
     //need counter to track number of occurrences
+    int counter_char = 0;
+
+     //iterate through the line
+    for(int i = 0; i < line.length(); i++) {
+        //check if character at current index matches the character given
+        if(line[i] == c) {
+            //add to counter
+            counter_char++;
+        }
+    }
+    //return the amount of occurences
+    return counter_char;
+}
+
+
+std::string removeLeadingSpaces(std::string line) {
+    //counter
+    int remove_index = 0;
+
+    //remove index
+    while(isspace(line[remove_index])) {
+        remove_index++;
+    }
+        //return new
+    return line.substr(remove_index);
+}
+
+
+
+int main() {
+    std::string unindent_line;
     int counter = 0;
 
-    //iterate through the line
-    for(int i = 0; i < line.length(); i++){
-        //check if character at current index matches the character given
-        if(line[i] == c){
-            //add to counter
-            counter++;
+    while(std::getline(std::cin, unindent_line, '\n')) {
+
+        if(removeLeadingSpaces(unindent_line)[0] == '}') {
+            for(int i = 0; i < counter - 1; i++) {
+                std::cout << "\t"; 
+            }
+        } else {
+            for(int i = 0; i < counter; i++) {
+                std::cout << "\t";
+            }
         }
+
+        counter -= countChar(unindent_line, '}');
+        counter += countChar(unindent_line, '{');
+        std::cout << removeLeadingSpaces(unindent_line) << std::endl;
     }
 
-    //return the amount of occurences
-    return counter;
+    return 0;
 }
-
-
-//we need to enhance this part from the last task apparently 
-std::string removeLeadingSpaces(std::string line){
-    //store the new line
-    std::string modified_line;
-
-    //counter to track indentations
-    int open_curly_brace = 0;
-
-    //read each line
-    while(getline(std::cin, line)){
-
-        //index for characters
-        int index = 0;
-
-        //check if character at index is a space
-        while(isspace(line[index])){
-            //increment until we get to a non space character
-            index++;
-        }
-
-        //update indentation tracker based on the count of '{' and '}' characters
-        open_curly_brace += countChar(line,'{') - countChar(line, '}');
-
-        //print number of tabs based off open curly braces
-        for(int i = 0; i < open_curly_brace; i++){
-            std::cout << "\t";
-        }
-
-
-        //Adjust indent when line ends with '}'
-        if(line[line.length() - 1] == '}'){
-            open_curly_brace--;
-        }
-
-        //store characters that are not spaces(without indentation) starting from incremented index index
-        modified_line = line.substr(index);
-
-        //print out the rest of the string that doesnt include space characters in the beginning
-        std::cout << modified_line << std::endl;
-
-    }
-
-    return modified_line;
-}
-
-
-int main(){
-    std::string line;
-
-    removeLeadingSpaces(line);
-}
-
-
-/*
-    std::string line;
-
-    //go through each line
-    while(getline(std::cin,line)){
-        //prints out character count and the line
-        std::cout << countChar(line,'{') << " " << line << std::endl;
-    }
-*/
