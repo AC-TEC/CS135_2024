@@ -277,5 +277,218 @@ FINAL ANSWER: -12
 */
 
 //! QUESTION 9
+/*
+
+What is output for the following code?
+    int a = 5;     //a = 5
+    int* p = &a;  // p = 5 bc pointing to a
+    *p += 3;       //p = 8 bc 5+3=8
+    cout << a << endl;   //a = 8 bc in prev line we manipulated a through the p pointer
+
+Answer: 8
+*/
+
+//! QUESTION 10
+/*
+What is the output for the following code?
+#include <iostream>
+using namespace std;
+
+void foo(int& a, int& b);
+
+int main() {
+    int i = 0;
+    int j = 3;
+
+    foo(i, j);
+
+    cout << "i = " << i << ", j = " << j << endl;
+    return 0;
+}
+
+void foo(int& a, int& b) {
+    if (a < b) {
+    a++;
+    b--;
+}
+
+}
+
+ANSWER: i =  1      j = 2
+
+*/
+
+
+//! QUESTION 11 
+/*
+Write code to calculate a
+b+
+√
+3c, and put the result to variable c. Assume that a, b, and c are properly defined
+and initialized double number. Hints: you may use pow and sqrt function.
+
+
+#include <iostream>
+#include <cmath>
+
+int main(){
+    std::cout << pow(3,2) + sqrt((3*6));
+}
+
+*/
+
+
+
+//! QUESTION 13
+
+/*
+Write code in main to read a string (may contain spaces) from console, find out and print out the number of
+letter ’a’ in it. For example, suppose we enter “apple orange”, then print out 2.
+Here is a sample input/output:
+Enter a string: apple orange
+appearances of a: 2
+
+#include <iostream>
+#include <string>
+
+int main(){
+    std::string given_string;
+
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, given_string);
+
+    int counter_of_a = 0;
+
+    for(int i = 0; i < given_string.length(); i++){
+        if(given_string[i] == 'a'){
+            counter_of_a ++;
+        }
+    }
+
+    std::cout << "Apperances: " << counter_of_a << std::endl;
+    return 0;
+}
+*/
+
+//! QUESTION 14
+
+/*
+Define a function, for a given array of integers and its size, find out whether all its elements are even or not.
+For example, call the above function on array with values 1, 2, 3, the return is false. Call the above function
+on array with values 2, 6, 8, 10, the return is true.
+
+
+#include <iostream>
+
+bool isEven(int arr[], int size_of_array){
+    for(int i = 0; i < size_of_array; i++){
+        if(arr[i] % 2 != 0){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+int main(){
+    int arr[] = {2,6,8,10};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    bool check = isEven(arr,size);
+
+    if(check == 1){
+        std::cout << "TRUE" << std::endl;
+    }else{
+        std::cout << "FALSE" << std::endl;
+    }
+
+    return 0;
+}
+
+*/
+
+
+//! QUESTION 15
+
+/*
+Define a function named range, for a given array of integers and its size, return the difference of its
+largest and smallest elements.
+
+
+#include <iostream>
+
+int difference(int arr[], int size_arr){
+    int min = arr[0]; // -2
+    int max = arr[0]; // 6 9
+
+    for(int i = 0; i < size_arr; i++){
+        if(arr[i] < min){
+            min = arr[i];
+        }else if(arr[i] > max){
+            max = arr[i];
+        }
+    }
+
+    //get difference
+    int diff = max - min; //9-(-2) = 9+2 = 11
+
+    return diff;
+}
+
+int main(){
+    int arr[] = {1, -2, 6, 9};
+    int size_of_array = sizeof(arr)/sizeof(arr[0]);
+    std::cout << "size of array: " << size_of_array << std::endl;
+
+    int diff = difference(arr,size_of_array);
+
+    std::cout << "DIFFERENCE: " << diff << std::endl;
+}
+
+*/
+
+
+//! QUESTION 16
+
+/*
+Define a function, for a given string, return a string without digital letters in the original string.
+For example, call the above function on “hello123, h1o2w a3r4e y5ou?”, the return is “hello, how are you?”.
+You may use int isdigit ( int c ); to test whether character is a decimal digit or not.
+
+
+#include <iostream>
+#include <string>
+#include <cctype>
+
+std::string remove_numbers(std::string given_string){
+    std::string no_numbers_string = "";
+
+    //iterate through string and check if not a number
+    //if its not then add to no_numbers_string.
+    for(int i = 0; i < given_string.length(); i++){
+        if(!isdigit(given_string[i])){
+            no_numbers_string += given_string[i];
+        }
+    }
+
+    return no_numbers_string;
+}
+
+
+int main(){
+    std::string get_string;
+    std::cout << "Enter string: ";
+    std::getline(std::cin, get_string);
+
+    //call function and print
+    std::string updated = remove_numbers(get_string);
+
+    std::cout << "NEW STRING: " << updated << std::endl;
+    return 0;
+}
+
+*/
+
 
 
