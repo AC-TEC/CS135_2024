@@ -89,7 +89,6 @@ int main(){
 */
 
 
-
 //? QUESTION 6
 
 /*
@@ -150,4 +149,133 @@ int main(){
 }
 
 */
+
+
+//*MIDETERM OF CS135 V1 OCTOBER 16,2023
+
+//! QUESTION 1
+
+/*
+Given int arr[] = {-1,6,5,3}, what is arr[2]?
+
+
+#include <iostream>
+int main(){
+    int arr[] = {-1,6,5,3};
+    std::cout << "ANSWER: " << arr[2] << std::endl;
+    //The value at arr[2] == 5
+}
+
+*/
+
+
+//! QUESTION 2
+
+/*
+Declare function foo whose first formal parameter is a double variable named d (pass by reference) and second
+formal parameter is an int variable named i (pass by value) and there is no return type. You just need to
+write the function header, no implementation is needed.
+
+
+#include <iostream>
+void foo (double& d, int i);
+
+*/
+
+
+//! QUESTION 3
+
+/*
+What does rand() % 3 + 2 produce?
+
+Answer: An interval of numbers from [2,4] this is my response and it is correct
+
+Breakdown: rand() % 3 generates a random integer from 0-3 not including 3 so it would be [0,1,2].
+            + 2 would add 2 to each number being generated making them [2,3,4]
+*/
+
+
+//! QEUSTION 4
+
+/*
+Given string greeting = "Wonderful"; What is the value for greeting.substr(2, 4)?
+
+
+#include <iostream>
+#include <string>
+
+int main(){
+    std::string greeting = "Wonderful";
+    std::cout << greeting.substr(2,4) << std::endl;
+    //outputs: from 2nd index and 4 characters in length starting from there on(2nd index included) so output is nder
+}
+
+*/
+
+
+//! QUESTION 5
+
+/*
+Suppose a runnable file is prog, write command to run it and redirect input from data.txt.
+prog < data.txt
+*/
+
+//! Question 6
+
+/*
+
+What is the value of 2 + 1 / 2 * 6.0?
+
+
+#include <iostream>
+int main(){
+    std::cout << "TOGETHER: " << 2 + 1 / 2 * 6.0 << std::endl;
+    ?P.E.M.D.A.S
+
+    2 * 6.0 = 12
+    1 / 12 = 0.08333 == 0 bc when doing division we dont count the remainder
+    2+0 = 2 
+
+    ?FINAL ANSWER = 2
+}
+
+*/
+
+
+//! QUESTION 7
+
+/*
+Suppose n is 234, what the value of digit after the following two statements?
+
+n /= 10;  (x /= y ->  x = x/y )   n = n/10 ->  n = 234/10 --->  n == 23     / we care about quotient not remainder
+digit = n % 10;     digit == 3     bc % we care about remainder
+final answer: digit is 3
+*/
+
+
+//! QUESTION 8
+/*
+What is the output of the following code?
+#include <iostream>
+using namespace std;
+
+int main() {
+    int sum = 0;
+    for (int i = -6; i < 2; i += 2)
+        sum += i;
+    cout << sum << endl;
+    return 0;
+}
+
+sum = 0     i = -6
+sum = -6    i = -4
+sum = -10   i = -2
+sum = -12   i = 0
+sum = -12   i = 2 (STOP AND DONT ADD TO SUM BC i == 2 and stops when i < 2)
+
+FINAL ANSWER: -12
+*/
+
+//! QUESTION 9
+
 
