@@ -70,3 +70,43 @@ int main(){
 
     return 0;
 }
+
+
+
+//print composite numbers (numbers opposite of prime)
+//from interval [1,10]
+
+
+#include <iostream>
+
+bool isPrime(int n){
+    if(n < 2){
+        return false;
+    }
+
+
+    //check if divisible by any number other than 2 and itself
+    for(int i = 2; i < n; i++){
+        if(n % i == 0){
+            //if is divisible
+            return false;
+        }
+    }
+
+    //means number is prime
+    return true;
+}
+
+
+int main(){
+    //loop through given interval and print composite numbers found
+    for(int i = 1; i <= 10; i++){
+        //if not prime that means its composite and greater than 1(bc 1 is neither prime or composite)
+        if(!isPrime(i) && i > 1){
+            //print number
+            std::cout << i << " ";
+        }
+    }
+    return 0;
+}
+
