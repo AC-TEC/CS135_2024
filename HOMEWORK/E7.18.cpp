@@ -92,6 +92,5 @@ int main(){
     //call function and print perimeter
     double perimeter_triangle = perimeter(p);
     std::cout << "TRIANGLE PERIMETER: " << perimeter_triangle << std::endl;
-
     return 0;
 }
