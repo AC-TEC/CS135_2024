@@ -15,13 +15,18 @@ public: //public method member, any class can use these methods
        //Place numPairs pairs of random integers in range [0, 999] in numSlots space, need numPairs > 0, numSlots > 0, and numSlots >= 2 * numPairs
     
 
-    MemoryGame(string *words, int size, int numSlots);
+    MemoryGame(std::string *words, int size, int numSlots);
        //instead of randomly generated integers,
        //use words as data
     
 
     ~MemoryGame();
     
+/*
+    //?for testing
+    const std::string* getValues() const;
+    const bool* get_bshown() const;
+*/
 
     void play();
     
@@ -54,12 +59,12 @@ private: //private data members, private means that
         //make the problem more challenging
 
 
-    string *values;
+    std::string *values;
         //a string to represent the layout of data,
         //mixed with possible empty strings.
         //Use array to access each element in const time.
 
-    
+
     bool *bShown;
         //an array of boolean to indicate which element of
         //array values is shown or not.
