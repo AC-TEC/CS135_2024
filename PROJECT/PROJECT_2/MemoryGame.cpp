@@ -306,6 +306,10 @@ int MemoryGame::input() const{
     //Check if user response enters a valid index
     //If not ask user to re-enter until number entered is not negative or larger than numSlots
     while(user_response < numSlots || user_response > numSlots){
-        
+        std::cout << "input is not in " << "[0, " << numSlots << "]. " << "Re-enter: ";
+        std::cin >> user_response;
     }
+
+    //compare user response with new one to check if we already flipped it
+    
 }
