@@ -5,15 +5,19 @@ Instructor: Tong Yi
 Assignment: PROJECT 2
 DATE: 4/2/2024
 
-Task A: Write default constructor, parameterized constructors and deconstructor
+Task A: Implement default constructor, parameterized constructors and deconstructor
 
-Task B: Write code for randomize() function
+Task B: Implement randomize() function
+
+Task C: Implement display() function
 */
 
 
 #include "MemoryGame.hpp"
 #include <iostream>
 #include <cstdlib> //for rand()
+#include <iomanip> //for setw()
+#include <cctype>  //for isdigit()
 
 //!Warning: remove all instances of srand(time(NULL)); statement before submitting to gradescope.
 
@@ -62,7 +66,7 @@ MemoryGame::MemoryGame() {
     bShown = new bool[numSlots];
     //set each element in array to false
     for(int i = 0; i < numSlots; i++){
-        bShown[i] = false;
+        bShown[i] = false; //!changed for display() testing have to change back to false
     }
 }
 
@@ -181,7 +185,7 @@ MemoryGame::~MemoryGame(){
     bShown = nullptr;
 }
 
-
+/*
 //?for testing(with default constructor) delete after finished using it
 const std::string* MemoryGame::getValues() const {
     return values;
@@ -190,7 +194,7 @@ const std::string* MemoryGame::getValues() const {
 const bool*  MemoryGame::get_bshown() const {
     return bShown;
 }
-
+*/
 
 void MemoryGame::play(){
     std::cout << "filler" << std::endl;
@@ -200,7 +204,65 @@ void MemoryGame::play(){
 void MemoryGame::display() const{
     //display array values, if bShown[i] is true,
     //then values[i] is displayed, where i is the index.
-    std::cout << "filler" << std::endl;
+    //?When using stew the number will be set at the index that is input. EX: setw(3) =  moves number 2 characters to the right which means it placed at the 3 character/index
+    
+
+    //print out labels(top portion of display() function)
+    //!problem could be the 5 separation instead do the way it has it (This was the problem-> fixed then worked)
+    
+    //first character separation
+    std::cout << " ";
+    for(int i = 0; i < numSlots; i++){
+        std::cout << std::setw(3) << i << std::setw(3) << " ";
+    }
+
+    //next line
+    std::cout << std::endl;
+
+
+
+    //draw seperation lines(top portion separation)
+    //the first '+'
+    std::cout << "+";
+    
+    //draw ------+ for (size) many times
+    for(int i = 0; i < numSlots; i++){
+        std::cout << "-----+";
+    }
+
+    //next line
+    std::cout << std::endl;
+
+
+
+    //print values (middle portion)
+    std::cout << "|";
+    for(int i = 0; i < numSlots;i++){
+        //if bShown is true display values otherwise dont
+        if(bShown[i]){
+            std::cout << std::setw(5) << values[i] << "|";
+        }else{
+            std::cout << "     |";
+        }
+    }
+
+    //next line
+    std::cout << std::endl;
+
+
+
+    //draw seperation lines(bottom portion)
+    //the first '+'
+    std::cout << "+";
+    
+    //draw ------+ for (size) many times
+    for(int i = 0; i < numSlots; i++){
+        std::cout << "-----+";
+    }
+
+    //next line
+    std::cout << std::endl;
+
 }
 
 

@@ -10,7 +10,7 @@ int main(){
     //create default game object
     MemoryGame def_game;
 
-
+/*
     //!TESTING DEFAULT CONSTRUCTOR
     const std::string* values = def_game.getValues(); 
 
@@ -41,6 +41,10 @@ int main(){
     for (int i = 0; i < 8; i++) {
         std::cout << r_values[i] << std::endl;
     }
+*/
+
+    //call display() function
+    def_game.display();
 
     //free memory
     def_game.~MemoryGame();
