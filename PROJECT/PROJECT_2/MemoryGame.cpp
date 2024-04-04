@@ -6,6 +6,8 @@ Assignment: PROJECT 2
 DATE: 4/2/2024
 
 Task A: Write default constructor, parameterized constructors and deconstructor
+
+Task B: Write code for randomize() function
 */
 
 
@@ -179,8 +181,8 @@ MemoryGame::~MemoryGame(){
     bShown = nullptr;
 }
 
-/*
-//?for testing delete after finished using it
+
+//?for testing(with default constructor) delete after finished using it
 const std::string* MemoryGame::getValues() const {
     return values;
 }
@@ -188,7 +190,7 @@ const std::string* MemoryGame::getValues() const {
 const bool*  MemoryGame::get_bshown() const {
     return bShown;
 }
-*/
+
 
 void MemoryGame::play(){
     std::cout << "filler" << std::endl;
@@ -204,7 +206,24 @@ void MemoryGame::display() const{
 
 void MemoryGame::randomize(){
     //randomize the layout of elements in values.
-    std::cout << "Filler" << std::endl;
+
+    //Get size of values array(will use this to randomize)
+    int size = numSlots;
+    
+    //seed random number generator(for better randomization)
+    //srand(time(0));
+
+    //Repeat while size greater than 1 (randomization)
+    while(size > 1){
+        //generate random index from interval [0,size]
+        int random_index = rand() % size;
+
+        //swap the chosen random element with the last element in values array
+        std::swap(values[random_index], values[size - 1]);
+
+        //reduce size by 1
+        size--;
+    }
 }
 
 int MemoryGame::input() const{

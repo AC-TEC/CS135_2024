@@ -22,11 +22,11 @@ public: //public method member, any class can use these methods
 
     ~MemoryGame();
     
-/*
-    //?for testing
+
+    //?for testing(with default constructor)
     const std::string* getValues() const;
     const bool* get_bshown() const;
-*/
+
 
     void play();
     
