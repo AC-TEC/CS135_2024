@@ -10,6 +10,8 @@ Task A: Implement default constructor, parameterized constructors and deconstruc
 Task B: Implement randomize() function
 
 Task C: Implement display() function
+
+Task D: Implement input() and play() function
 */
 
 
@@ -17,7 +19,7 @@ Task C: Implement display() function
 #include <iostream>
 #include <cstdlib> //for rand()
 #include <iomanip> //for setw()
-#include <cctype>  //for isdigit()
+
 
 //!Warning: remove all instances of srand(time(NULL)); statement before submitting to gradescope.
 
@@ -288,11 +290,22 @@ void MemoryGame::randomize(){
     }
 }
 
+
 int MemoryGame::input() const{
     //input an int that is a valid index and 
     //the corresponding element of values is not shown yet.
     //That is, the input i is in [0, numSlots) and
     //bShown[i] is false.
-    int filler = 1;
-    return filler;
+
+
+    //Get user response
+    int user_response;
+    std::cout << "Enter a unflipped card in " << "[0, " << numSlots << "]" << ": ";
+    std::cin >> user_response;
+
+    //Check if user response enters a valid index
+    //If not ask user to re-enter until number entered is not negative or larger than numSlots
+    while(user_response < numSlots || user_response > numSlots){
+        
+    }
 }
