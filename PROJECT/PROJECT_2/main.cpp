@@ -51,7 +51,10 @@ int main(){
 
     //call input() function
     //will have to modify the bShown part in default constructor to really test if works
-    def_game.input();
+    //def_game.input();
+
+    //play game
+    def_game.play();
 
 
     //free memory
