@@ -10,6 +10,7 @@ int main(){
     //create default game object
     MemoryGame def_game;
 
+//!TESTING DEFAULT CONSTRUCTOR
 /*
     //!TESTING DEFAULT CONSTRUCTOR
     const std::string* values = def_game.getValues(); 
@@ -43,8 +44,15 @@ int main(){
     }
 */
 
+    
     //call display() function
-    def_game.display();
+    //def_game.display();
+
+
+    //call input() function
+    //will have to modify the bShown part in default constructor to really test if works
+    def_game.input();
+
 
     //free memory
     def_game.~MemoryGame();
