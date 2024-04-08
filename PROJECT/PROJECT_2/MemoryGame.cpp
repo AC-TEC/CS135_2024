@@ -197,7 +197,6 @@ void MemoryGame::play(){
     display();
 
     //count how many rounds it took until we found all pairs
-    //no round 0
     int rounds = 1;
 
     //counter for number of pairs found
