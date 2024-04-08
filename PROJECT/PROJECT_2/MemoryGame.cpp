@@ -3,7 +3,7 @@ Author: Andy Cocha
 Course: CSCI-135
 Instructor: Tong Yi
 Assignment: PROJECT 2
-DATE: 4/2/2024
+DATE: 4/8/2024
 
 Task A: Implement default constructor, parameterized constructors and deconstructor
 
@@ -60,7 +60,6 @@ MemoryGame::MemoryGame() {
 
     //add empty string to remaining positions of values array
     for(int i = 6; i < numSlots; i++){
-        //!changed so i can see if its an empty string for slot change back to "" before submission
         values[i] = ""; //values[6] & values[7]
     }
 
@@ -68,24 +67,9 @@ MemoryGame::MemoryGame() {
     //dynamically allocate an array of booleans with numSlot elements and assign it to data member bShown
     bShown = new bool[numSlots];
     //set each element in array to false
-    for(int i = 0; i < numSlots; i++){ //!change numSlots-1 back to numSlots
+    for(int i = 0; i < numSlots; i++){ 
         bShown[i] = false; //!changed for display() testing have to change back to false
     }
-    //!bShown[7] = false; //delete once finished(used to check how program will repsond once entered a card index that is not flipped already)
-
-/*
-//?It did work
-    //set each element in array to false
-    for(int i = 0; i < numSlots-1; i++){ //!change numSlots-1 back to numSlots
-        bShown[i] = true; //!changed for display() testing have to change back to false
-    }
-
-    bShown[7] = false; //!delete once finished(used to check how program will repsond once entered a card index that is not flipped already)
-    //!want to see if my input() function stops once card that is not flipped is entered
-
-
-*/
-
 }
 
 
@@ -144,6 +128,7 @@ MemoryGame::MemoryGame(int numPairs, int numSlots){
 
 }
 
+
 //Parameterized constructor
 MemoryGame::MemoryGame(std::string *words, int size, int numSlots){
     //instead of randomly generated integers,
@@ -193,7 +178,6 @@ MemoryGame::MemoryGame(std::string *words, int size, int numSlots){
 }
 
 
-
 //Deconstructor
 MemoryGame::~MemoryGame(){
     //free memory from all dynamically allocated arrays
@@ -203,17 +187,8 @@ MemoryGame::~MemoryGame(){
     bShown = nullptr;
 }
 
-/*
-//?for testing(with default constructor) delete after finished using it
-const std::string* MemoryGame::getValues() const {
-    return values;
-}
 
-const bool*  MemoryGame::get_bshown() const {
-    return bShown;
-}
-*/
-
+//?TASK D
 void MemoryGame::play(){
     //randomly place several integers and strings into slots
     randomize();
@@ -222,20 +197,18 @@ void MemoryGame::play(){
     display();
 
     //count how many rounds it took until we found all pairs
-    //mo round 0
+    //no round 0
     int rounds = 1;
 
     //counter for number of pairs found
-    //will use this to see if we have reached the amount of pairs in the game (# of numpairs depends on each constructor default = 3 other constrcutors = user based)
+    //will use this to see if we have reached the amount of pairs in the game (# of pairs depends on each constructor)
     int number_of_pairs = 0;
 
 
-    //!ohhhh im fucking up i was looking at rounds in instructions and thinking if user enters the same index twice then it will face up
-    //! it was if value not index. so if value is the same then make them both face up (make both shown) else you just dont
-    //!also i was fucking up thinking why is round 2 not showing that is bc round 1 and round 2 are connecetd so if round 1 we input valid input then we show
-    //!but if we enter a valid index and value of second input does not match that of the first then we wont flip its card 
+    //!also i was fucking up thinking why is round 2 not showing that is bc round 1 and round 2 are connecetd so if round 1 we have valid input then we show
+    //!but if we enter a valid index of second input and value does not match that of the first then we wont flip its card 
 
-    //?so think of the rounds as pairs round 1 and 2 are connected then boom for round 3 it refreshes that why when 1 is entered for input it is flipped up and for round 2 its not flipped up
+    //?so think of the rounds as pairs round 1 and 2 are connected then boom for round 3 it refreshes
 
     //loop game until we find pairs
     while(number_of_pairs < numPairs){
@@ -262,7 +235,7 @@ void MemoryGame::play(){
 
         //check if first card and second match
         //if they do then flip second card and display
-        //else unflip first card and display(dont have to do nothing to second card bc its unflippped by default)
+        //else unflip first card and second card(dont have to for 2nd bc its done by default) then display
         if(values[first_card_index] == values[second_card_index]){
             //flip second card
             bShown[second_card_index] = true;
@@ -292,6 +265,7 @@ void MemoryGame::play(){
 }
 
 
+//?TASK C
 void MemoryGame::display() const{
     //display array values, if bShown[i] is true,
     //then values[i] is displayed, where i is the index.
@@ -299,7 +273,6 @@ void MemoryGame::display() const{
     
 
     //print out labels(top portion of display() function)
-    //!problem could be the 5 separation instead do the way it has it (This was the problem-> fixed then worked)
     
     //first character separation
     std::cout << " ";
@@ -357,6 +330,7 @@ void MemoryGame::display() const{
 }
 
 
+//?TASK B
 void MemoryGame::randomize(){
     //randomize the layout of elements in values.
 
@@ -380,6 +354,7 @@ void MemoryGame::randomize(){
 }
 
 
+//?TASK D
 int MemoryGame::input() const{
     //input an int that is a valid index and 
     //the corresponding element of values is not shown yet.
@@ -395,43 +370,23 @@ int MemoryGame::input() const{
 
 
     //Check if user response enters a valid index
-    //If not ask user to re-enter until number entered is not negative or larger than numSlots
-    while(user_response < 0 || user_response > numSlots-1 || bShown[user_response]){ //second condition could be: user_response > (numSlots-1) since last index of values array is 7 which is numSlots-1
-        //?changed it to numSlots-1 bc last index of values array is 7 not 8(7 not 8 is default constrcutor exmaple)
+    //If not ask user to re-enter until number entered is not negative or larger than last index of array or already flipped
+    while(user_response < 0 || user_response > numSlots-1 || bShown[user_response]){ 
+
+        //if user enters number thats is negative or larger than last index
         if(user_response < 0 || user_response > numSlots-1) {
             std::cout << "Input is not in [0, " << numSlots-1 << "]. ";
         } else {
+            //card is already flipped(bShown[user_reponse] == true)
             std::cout << "The card is flipped already. ";
         }
+
+        //get input again
         std::cout << "Re-enter: ";
         std::cin >> user_response;
     }
 
-/*
-    //Check if user response enters a valid index
-    //If not ask user to re-enter until number entered is not negative or larger than numSlots
-    while(user_response < 0 || user_response > numSlots-1){ //second condition could be: user_response > (numSlots-1) since last index of values array is 7 which is numSlots-1
-        //?changed it to numSlots-1 bc last index of values array is 7 not 8(7 not 8 is default constrcutor exmaple)
-        std::cout << "input is not in " << "[0, " << numSlots-1 << "]. " << "Re-enter: ";
-        std::cin >> user_response;
 
-
-
-        //check for valid index and if card is already flipped.Prompt to re-enter
-        //while card at index user_response is flipped then re-enter until user inputs an index for a card that is not flipped(aka false in bShown array)
-        //using bShown[] array bc that array tells us which cards at which index have already been flipped
-        while(bShown[user_response] == true){
-            std::cout << "The card is flipped already. Re-enter: ";
-            std::cin >> user_response;
-        }
-    }
-
-    //compare user response with new one to check if we already flipped it(will have to use bShown array)
-    //while the card is flipped up already(when bShown is true)
-    //ask user to re-enter for a new card that is not flipped
-    //while card at index user_response is flipped then re-enter until user inputs an index for a card that is not flipped(aka false in bShown array)
-*/
-
-    //passed all checks that would return an invalid input
+    //passed all checks. So not invalid input
     return user_response;
 }
