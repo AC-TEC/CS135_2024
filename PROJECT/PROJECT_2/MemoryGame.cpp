@@ -67,9 +67,24 @@ MemoryGame::MemoryGame() {
     //dynamically allocate an array of booleans with numSlot elements and assign it to data member bShown
     bShown = new bool[numSlots];
     //set each element in array to false
-    for(int i = 0; i < numSlots; i++){
+    for(int i = 0; i < numSlots; i++){ //!change numSlots-1 back to numSlots
         bShown[i] = false; //!changed for display() testing have to change back to false
     }
+    //!bShown[7] = false; //delete once finished(used to check how program will repsond once entered a card index that is not flipped already)
+
+/*
+//?It did work
+    //set each element in array to false
+    for(int i = 0; i < numSlots-1; i++){ //!change numSlots-1 back to numSlots
+        bShown[i] = true; //!changed for display() testing have to change back to false
+    }
+
+    bShown[7] = false; //!delete once finished(used to check how program will repsond once entered a card index that is not flipped already)
+    //!want to see if my input() function stops once card that is not flipped is entered
+
+
+*/
+
 }
 
 
@@ -300,16 +315,34 @@ int MemoryGame::input() const{
 
     //Get user response
     int user_response;
-    std::cout << "Enter a unflipped card in " << "[0, " << numSlots << "]" << ": ";
+    //?changed it to numSlots-1 bc last index of values array is 7 not 8(7 not 8 is default constructor example)
+    std::cout << "Enter a unflipped card in " << "[0, " << numSlots-1 << "]" << ": ";
     std::cin >> user_response;
 
     //Check if user response enters a valid index
     //If not ask user to re-enter until number entered is not negative or larger than numSlots
-    while(user_response < numSlots || user_response > numSlots){
-        std::cout << "input is not in " << "[0, " << numSlots << "]. " << "Re-enter: ";
+    while(user_response < 0 || user_response > numSlots-1){ //second condition could be: user_response > (numSlots-1) since last index of values array is 7 which is numSlots-1
+        //?changed it to numSlots-1 bc last index of values array is 7 not 8(7 not 8 is default constrcutor exmaple)
+        std::cout << "input is not in " << "[0, " << numSlots-1 << "]. " << "Re-enter: ";
         std::cin >> user_response;
+
+
+
+        //check for valid index and if card is already flipped.Prompt to re-enter
+        //while card at index user_response is flipped then re-enter until user inputs an index for a card that is not flipped(aka false in bShown array)
+        //using bShown[] array bc that array tells us which cards at which index have already been flipped
+        while(bShown[user_response] == true){
+            std::cout << "The card is flipped already. Re-enter: ";
+            std::cin >> user_response;
+        }
     }
 
-    //compare user response with new one to check if we already flipped it
-    
+    //compare user response with new one to check if we already flipped it(will have to use bShown array)
+    //while the card is flipped up already(when bShown is true)
+    //ask user to re-enter for a new card that is not flipped
+    //while card at index user_response is flipped then re-enter until user inputs an index for a card that is not flipped(aka false in bShown array)
+
+
+    //passed all checks that would return an invalid input
+    return user_response;
 }
