@@ -60,6 +60,7 @@ MemoryGame::MemoryGame() {
 
     //add empty string to remaining positions of values array
     for(int i = 6; i < numSlots; i++){
+        //!changed so i can see if its an empty string for slot change back to "" before submission
         values[i] = ""; //values[6] & values[7]
     }
 
@@ -214,7 +215,80 @@ const bool*  MemoryGame::get_bshown() const {
 */
 
 void MemoryGame::play(){
-    std::cout << "filler" << std::endl;
+    //randomly place several integers and strings into slots
+    randomize();
+
+    //display board layout
+    display();
+
+    //count how many rounds it took until we found all pairs
+    //mo round 0
+    int rounds = 1;
+
+    //counter for number of pairs found
+    //will use this to see if we have reached the amount of pairs in the game (# of numpairs depends on each constructor default = 3 other constrcutors = user based)
+    int number_of_pairs = 0;
+
+
+    //!ohhhh im fucking up i was looking at rounds in instructions and thinking if user enters the same index twice then it will face up
+    //! it was if value not index. so if value is the same then make them both face up (make both shown) else you just dont
+    //!also i was fucking up thinking why is round 2 not showing that is bc round 1 and round 2 are connecetd so if round 1 we input valid input then we show
+    //!but if we enter a valid index and value of second input does not match that of the first then we wont flip its card 
+
+    //?so think of the rounds as pairs round 1 and 2 are connected then boom for round 3 it refreshes that why when 1 is entered for input it is flipped up and for round 2 its not flipped up
+
+    //loop game until we find pairs
+    while(number_of_pairs < numPairs){
+        //print out number of round
+        std::cout << "Round: " << rounds << std::endl;
+
+        //get input for first card
+        int first_card_index = input();
+
+        //flip card
+        bShown[first_card_index] = true;
+
+        //display the flipped card on board
+        display();
+
+        //move to next round(for second card)
+        rounds++;
+
+        //print out next round
+        std::cout << "Round: " << rounds << std::endl;
+
+        //get intput for second card
+        int second_card_index = input();
+
+        //check if first card and second match
+        //if they do then flip second card and display
+        //else unflip first card and display(dont have to do nothing to second card bc its unflippped by default)
+        if(values[first_card_index] == values[second_card_index]){
+            //flip second card
+            bShown[second_card_index] = true;
+
+            //increment counter for number of pairs found
+            number_of_pairs++;
+
+            //display both cards
+            display();
+        }else{
+            //unflip first card
+            bShown[first_card_index] = false;
+
+            //unflip second card
+            bShown[second_card_index] = false;
+
+            //display unflipped cards
+            display();
+        }
+
+        //increase counter for rounds after we found and displayed the pairs
+        rounds++;
+    }
+
+    //once all pairs are found print out result message
+    std::cout << "Congratulations! Found out all pairs in " << rounds << " rounds" << std::endl;
 }
 
 
@@ -319,6 +393,21 @@ int MemoryGame::input() const{
     std::cout << "Enter a unflipped card in " << "[0, " << numSlots-1 << "]" << ": ";
     std::cin >> user_response;
 
+
+    //Check if user response enters a valid index
+    //If not ask user to re-enter until number entered is not negative or larger than numSlots
+    while(user_response < 0 || user_response > numSlots-1 || bShown[user_response]){ //second condition could be: user_response > (numSlots-1) since last index of values array is 7 which is numSlots-1
+        //?changed it to numSlots-1 bc last index of values array is 7 not 8(7 not 8 is default constrcutor exmaple)
+        if(user_response < 0 || user_response > numSlots-1) {
+            std::cout << "Input is not in [0, " << numSlots-1 << "]. ";
+        } else {
+            std::cout << "The card is flipped already. ";
+        }
+        std::cout << "Re-enter: ";
+        std::cin >> user_response;
+    }
+
+/*
     //Check if user response enters a valid index
     //If not ask user to re-enter until number entered is not negative or larger than numSlots
     while(user_response < 0 || user_response > numSlots-1){ //second condition could be: user_response > (numSlots-1) since last index of values array is 7 which is numSlots-1
@@ -341,7 +430,7 @@ int MemoryGame::input() const{
     //while the card is flipped up already(when bShown is true)
     //ask user to re-enter for a new card that is not flipped
     //while card at index user_response is flipped then re-enter until user inputs an index for a card that is not flipped(aka false in bShown array)
-
+*/
 
     //passed all checks that would return an invalid input
     return user_response;
