@@ -16,7 +16,6 @@ TASK D: Implement scheduleAfter() function to produce and return a new TimeSlot 
 TASK E: Implement the timeOverlap() function that checks if two time slots overlap
 
 */
-
 #include <iostream>
 #include <string>
 
@@ -30,7 +29,7 @@ public:
     int m;
 };
 
-//?TASK C
+//TASK C
 class Movie { 
 public: 
     std::string title;
