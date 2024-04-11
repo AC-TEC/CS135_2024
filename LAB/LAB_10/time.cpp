@@ -10,21 +10,27 @@ Task A: Implement two functions. One that calculates the amount of minutes from 
 Task B: Implement the addMinutes() function which takes in a time object and a integer min which adds the minutes to the time object inserted and then generates a new time object with the additional minutes added to it
 
 TASK C: Implement PrintTimeslots() function
+
+TASK D: Implement scheduleAfter() function to produce and return a new TimeSlot for the movie
+
+TASK E: Implement the timeOverlap() function that checks if two time slots overlap
+
 */
 
 #include <iostream>
 #include <string>
 
+//?TASK C
 enum Genre {ACTION, COMEDY, DRAMA, ROMANCE, THRILLER};
 
-
+//?TASK A
 class Time { 
 public:
     int h;
     int m;
 };
 
-
+//?TASK C
 class Movie { 
 public: 
     std::string title;
@@ -33,6 +39,7 @@ public:
 };
 
 
+//?TASK C
 class TimeSlot { 
 public: 
     Movie movie;     // what movie
@@ -40,6 +47,7 @@ public:
 };
 
 
+//?TASK A
 //calculates the total minutes 
 int minutesSinceMidnight(Time time){
     //convert hour to mins
@@ -53,6 +61,7 @@ int minutesSinceMidnight(Time time){
 }
 
 
+//?TASK A
 //calculates minutes between two times
 int minutesUntil(Time earlier, Time later){
     int early_mins = minutesSinceMidnight(earlier);
@@ -62,7 +71,7 @@ int minutesUntil(Time earlier, Time later){
 }
 
 
-
+//?TASK B
 Time addMinutes(Time time0, int min){
     //convert time0 object hours to mins
     int time_to_mins = minutesSinceMidnight(time0);
@@ -97,6 +106,7 @@ Time addMinutes(Time time0, int min){
 }
 
 
+//?TASK C
 void printMovie(Movie mv){
     std::string g;
     switch (mv.genre) {
@@ -110,6 +120,7 @@ void printMovie(Movie mv){
 }
 
 
+//?TASK C
 //prints movie details
 void printTimeSlot(TimeSlot ts){
     //get title,genre and movie duration
@@ -123,6 +134,39 @@ void printTimeSlot(TimeSlot ts){
     
     //prints out final part
     std::cout << "ends by " << end_time.h << ":" << end_time.m << "]" << std::endl;
+}
+
+
+//?TASK D
+// function to produce and return a new TimeSlot for the movie nextMovie, scheduled immediately after the time slot
+TimeSlot scheduleAfter(TimeSlot ts, Movie nextMovie) {
+    
+    // Calculate the end time of the current TimeSlot using the addMinutes function.
+    Time endTime = addMinutes(ts.startTime, ts.movie.duration);
+    
+    // Create a new TimeSlot for the next movie starting at the endTime of the current TimeSlot.
+    TimeSlot nextSlot = {nextMovie, endTime};
+    return nextSlot;
+}
+
+
+//?TASK E
+// function to check if two time slots overlap
+bool timeOverlap(TimeSlot ts1, TimeSlot ts2) {
+    // convert the start time of ts1 to minutes since midnight
+    int start1 = minutesSinceMidnight(ts1.startTime);
+    
+    // calculate the end time of ts1 by adding its duration to its start time
+    int end1 = start1 + ts1.movie.duration;
+    
+    // convert the start time of ts2 to minutes since midnight
+    int start2 = minutesSinceMidnight(ts2.startTime);
+    
+    // calculate the end time of ts2 by adding its duration to its start time
+    int end2 = start2 + ts2.movie.duration;
+    
+    // check if the two time slots overlap, return true if they do and false otherwise
+    return !(end1 <= start2 || end2 <= start1);
 }
 
 
@@ -148,6 +192,13 @@ int main(){
     printTimeSlot(evening);
     printTimeSlot(time_s1);
     printTimeSlot(time_s2);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    //testing the scheduleAfter function
+    TimeSlot nextSlot = scheduleAfter(time_s2, movie5);
+    printTimeSlot(nextSlot);
 
     return 0;
 }
@@ -229,5 +280,77 @@ int main(){
 
     return 0;
 }
+
+*/
+
+
+/*
+!TASK C MAIN FUNCTIONS
+
+int main(){
+
+    //creating several movies and time slots
+    Movie movie1 = {"Back to the Future", COMEDY, 116};
+    Movie movie2 = {"Black Panther", ACTION, 134};
+    Movie movie3 = {"The Godfather", DRAMA, 175};
+    Movie movie4 = {"Inception", THRILLER, 148};
+    Movie movie5 = {"La La Land", ROMANCE, 128};
+
+    //Timeslots
+    TimeSlot morning = {movie1, {9, 15}};  
+    TimeSlot daytime = {movie2, {12, 15}}; 
+    TimeSlot evening = {movie3, {16, 45}}; 
+    TimeSlot time_s1 = {movie4, {17,25}};
+    TimeSlot time_s2 = {movie5, {18,25}};
+
+    //print out details of each time slot
+    printTimeSlot(morning);
+    printTimeSlot(daytime);
+    printTimeSlot(evening);
+    printTimeSlot(time_s1);
+    printTimeSlot(time_s2);
+
+    return 0;
+}
+
+*/
+
+
+/*
+!TASK D MAIN FUNCTION
+
+int main(){
+
+    //creating several movies and time slots
+    Movie movie1 = {"Back to the Future", COMEDY, 116};
+    Movie movie2 = {"Black Panther", ACTION, 134};
+    Movie movie3 = {"The Godfather", DRAMA, 175};
+    Movie movie4 = {"Inception", THRILLER, 148};
+    Movie movie5 = {"La La Land", ROMANCE, 128};
+
+    //Timeslots
+    TimeSlot morning = {movie1, {9, 15}};  
+    TimeSlot daytime = {movie2, {12, 15}}; 
+    TimeSlot evening = {movie3, {16, 45}}; 
+    TimeSlot time_s1 = {movie4, {17,25}};
+    TimeSlot time_s2 = {movie5, {18,25}};
+
+    //print out details of each time slot
+    printTimeSlot(morning);
+    printTimeSlot(daytime);
+    printTimeSlot(evening);
+    printTimeSlot(time_s1);
+    printTimeSlot(time_s2);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    //testing the scheduleAfter function
+    TimeSlot nextSlot = scheduleAfter(time_s2, movie5);
+    printTimeSlot(nextSlot);
+
+    return 0;
+}
+
 
 */
