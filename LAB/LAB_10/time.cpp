@@ -9,16 +9,36 @@ Task A: Implement two functions. One that calculates the amount of minutes from 
 
 Task B: Implement the addMinutes() function which takes in a time object and a integer min which adds the minutes to the time object inserted and then generates a new time object with the additional minutes added to it
 
-
+TASK C: Implement PrintTimeslots() function
 */
 
 #include <iostream>
+#include <string>
+
+enum Genre {ACTION, COMEDY, DRAMA, ROMANCE, THRILLER};
+
 
 class Time { 
 public:
     int h;
     int m;
 };
+
+
+class Movie { 
+public: 
+    std::string title;
+    Genre genre;     // only one genre per movie
+    int duration;    // in minutes
+};
+
+
+class TimeSlot { 
+public: 
+    Movie movie;     // what movie
+    Time startTime;  // when it starts
+};
+
 
 //calculates the total minutes 
 int minutesSinceMidnight(Time time){
@@ -77,29 +97,57 @@ Time addMinutes(Time time0, int min){
 }
 
 
+void printMovie(Movie mv){
+    std::string g;
+    switch (mv.genre) {
+        case ACTION   : g = "ACTION"; break;
+        case COMEDY   : g = "COMEDY"; break;
+        case DRAMA    : g = "DRAMA";  break;
+        case ROMANCE  : g = "ROMANCE"; break;
+        case THRILLER : g = "THRILLER"; break;
+    }
+    std::cout << mv.title << " " << g << " (" << mv.duration << " min)";
+}
+
+
+//prints movie details
+void printTimeSlot(TimeSlot ts){
+    //get title,genre and movie duration
+    printMovie(ts.movie);
+
+    //print out starting time and end time of movie
+    std::cout << " [starts at " << ts.startTime.h << ":" << ts.startTime.m << ", ";
+    
+    //get end time
+    Time end_time = addMinutes(ts.startTime, ts.movie.duration);
+    
+    //prints out final part
+    std::cout << "ends by " << end_time.h << ":" << end_time.m << "]" << std::endl;
+}
+
+
 int main(){
-    //create a time object
-    Time original_time;
 
-    //get user input
-    std::cout << "Enter hour: ";
-    std::cin >> original_time.h;
-    std::cout << "Enter minutes: ";
-    std::cin >> original_time.m;
+    //creating several movies and time slots
+    Movie movie1 = {"Back to the Future", COMEDY, 116};
+    Movie movie2 = {"Black Panther", ACTION, 134};
+    Movie movie3 = {"The Godfather", DRAMA, 175};
+    Movie movie4 = {"Inception", THRILLER, 148};
+    Movie movie5 = {"La La Land", ROMANCE, 128};
 
+    //Timeslots
+    TimeSlot morning = {movie1, {9, 15}};  
+    TimeSlot daytime = {movie2, {12, 15}}; 
+    TimeSlot evening = {movie3, {16, 45}}; 
+    TimeSlot time_s1 = {movie4, {17,25}};
+    TimeSlot time_s2 = {movie5, {18,25}};
 
-    std::cout << std::endl;
-
-    //ask user for extra minutes
-    int extra_mins;
-    std::cout << "Add extra minutes: ";
-    std::cin >> extra_mins;
-
-    //create new time object and call the addMinutes function to generate the new time after additional minutes have been added
-    Time new_time = addMinutes(original_time,extra_mins);
-
-    //print out new time
-    std::cout << "New time is: " << new_time.h << ":" << new_time.m << std::endl;
+    //print out details of each time slot
+    printTimeSlot(morning);
+    printTimeSlot(daytime);
+    printTimeSlot(evening);
+    printTimeSlot(time_s1);
+    printTimeSlot(time_s2);
 
     return 0;
 }
@@ -145,6 +193,39 @@ int main(){
 
     //call minutesUntil() function
     std::cout << "The minutes between them are " << minutesUntil(time_1,time_2) << " minutes." << std::endl;
+
+    return 0;
+}
+
+*/
+
+
+/*
+!TASK B MAIN FUNCTION
+
+int main(){
+    //create a time object
+    Time original_time;
+
+    //get user input
+    std::cout << "Enter hour: ";
+    std::cin >> original_time.h;
+    std::cout << "Enter minutes: ";
+    std::cin >> original_time.m;
+
+
+    std::cout << std::endl;
+
+    //ask user for extra minutes
+    int extra_mins;
+    std::cout << "Add extra minutes: ";
+    std::cin >> extra_mins;
+
+    //create new time object and call the addMinutes function to generate the new time after additional minutes have been added
+    Time new_time = addMinutes(original_time,extra_mins);
+
+    //print out new time
+    std::cout << "New time is: " << new_time.h << ":" << new_time.m << std::endl;
 
     return 0;
 }
