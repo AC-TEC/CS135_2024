@@ -1,6 +1,6 @@
 #ifndef Hare_H
 #define Hare_H
-#include <vector>
+#include <vector> 
 
 
 class Hare {
