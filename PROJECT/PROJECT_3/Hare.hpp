@@ -30,6 +30,10 @@ public:
     
     void setPosition(int position);
 
+
+    //!Function to get value from patterns vector (for testing purposes)
+    std::vector<int> getPatterns() const;
+
 private:
     std::vector<int> patterns;
     
