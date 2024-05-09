@@ -3,7 +3,7 @@
 //Instructor: Tong Yi
 //Assignment: PROJECT 3
 //DATE: 5/8/2024
-//Task C: Implement default constructor, parameterized constructor, mark, gdisplay and length functions
+//Task C: Implement default constructor, parameterized constructor, mark, display and length functions
 
 #include "Road.hpp"
 #include <iostream>
