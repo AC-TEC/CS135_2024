@@ -12,6 +12,9 @@ TASK B: Write a program to add the numbers from a given range. From left to righ
 TASK C: Write a program to return the sum of all elements in a array.
 
 TASK D: Write a program which returns true if all characters in the string are letters and digits, otherwise returns false.
+
+TASK E: Write a program which returns true if the string is a sequence of nested parentheses: strings "", "()", "(())", "((()))"  are all correct sequences and should return true. 
+        Any other symbols or mismatching parenthesis should make the function return false.
 */
 #include <iostream>
 #include <string> //TASK D 
@@ -75,13 +78,26 @@ bool isAlphanumeric(std::string s){
 }
 
 
+//?TASK E
+bool nestedParens(std::string s) {
+    if (s.empty()) { // base case: empty string is valid
+        return true;
+    } else if (s[0] != '(' || s[s.length()-1] != ')') { // base case: string does not start and end with parentheses
+        return false;
+    } else { // recursive case: check if inner substring is nested
+        return nestedParens(s.substr(1, s.length()-2));
+    }
+}
+
+
+
 int main(){
     std::string s;
     std::cout << "Enter a string: ";
     std::getline(std::cin, s);
 
 //calls function
-    std::cout << isAlphanumeric(s) << std::endl;
+    std::cout << nestedParens(s) << std::endl;
 }
 
 
@@ -143,6 +159,21 @@ int main() {
     std::cout << "Sum is " << sum2 << std::endl;  // Sum is 34
 
     delete[] arr;         // deallocate it
+}
+
+*/
+
+
+/*
+!TASK D MAIN FUNCTION
+
+int main(){
+    std::string s;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, s);
+
+//calls function
+    std::cout << isAlphanumeric(s) << std::endl;
 }
 
 */
