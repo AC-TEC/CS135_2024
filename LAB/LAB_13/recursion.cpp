@@ -9,6 +9,7 @@ Task A: Write a program that prints all numbers in range left to right, separate
 
 TASK B: Write a program to add the numbers from a given range. From left to right
 
+TASK C: Write a program to return the sum of all elements in a array.
 */
 #include <iostream>
 
@@ -42,18 +43,46 @@ int sumRange(int left, int right){
 }
 
 
+//?TASK C
 
-int main(){
-    int left;
-    int right;
+//helper function
+int sumArrayInRange(int *arr, int left, int right){
+    if (left > right){ //base case
+        return 0; // returns 0 for empty range
+    } else{
+        return arr[left] + sumArrayInRange(arr, left + 1, right);  // add the leftmost element and recurse on the rest of the range
+    }
+}
 
-//Test #1
-    int x = sumRange(1, 3);
-    std::cout << "This is " << x << std::endl;
+//returns sum of all elements in array
+int sumArray(int *arr, int size){
+    return sumArrayInRange(arr,0,size - 1); // call the helper function sumArrayInRange on the whole array
+}
 
-//Test #2
-    int y = sumRange(-2, 10);
-    std::cout << "This is " << y << std::endl;
+
+
+int main() {
+
+    int size = 10;
+    int *arr = new int[size]; // allocate array dynamically
+    arr[0] = 12;
+    arr[1] = 17;
+    arr[2] = -5;
+    arr[3] = 3;
+    arr[4] = 7;
+    arr[5] = -15;
+    arr[6] = 27;
+    arr[7] = 5;
+    arr[8] = 13;
+    arr[9] = -21;
+
+    int sum1 = sumArray(arr, size); // Add all elements
+    std::cout << "Sum is " << sum1 << std::endl;  // Sum is 43
+    
+    int sum2 = sumArray(arr, 5); // Add up first five elements
+    std::cout << "Sum is " << sum2 << std::endl;  // Sum is 34
+
+    delete[] arr;         // deallocate it
 }
 
 
