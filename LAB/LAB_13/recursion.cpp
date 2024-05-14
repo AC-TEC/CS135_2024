@@ -10,8 +10,11 @@ Task A: Write a program that prints all numbers in range left to right, separate
 TASK B: Write a program to add the numbers from a given range. From left to right
 
 TASK C: Write a program to return the sum of all elements in a array.
+
+TASK D: Write a program which returns true if all characters in the string are letters and digits, otherwise returns false.
 */
 #include <iostream>
+#include <string> //TASK D 
 
 //?TASK A
 //function to recursivly call range of given numbers
@@ -44,7 +47,6 @@ int sumRange(int left, int right){
 
 
 //?TASK C
-
 //helper function
 int sumArrayInRange(int *arr, int left, int right){
     if (left > right){ //base case
@@ -60,6 +62,64 @@ int sumArray(int *arr, int size){
 }
 
 
+
+//?TASK D
+bool isAlphanumeric(std::string s){
+    if (s.size() == 0) { // base case
+        return true;
+    } else if (!isalnum(s[0])) { // if first character is not alphanumeric(character or #)
+        return false;
+    } else { // recursive case
+        return isAlphanumeric(s.substr(1)); //calls it self shorter(index - 1) each time until reaches last character whcih at that point return true bc size is 0
+    }
+}
+
+
+int main(){
+    std::string s;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, s);
+
+//calls function
+    std::cout << isAlphanumeric(s) << std::endl;
+}
+
+
+
+/*
+!TASK A MAIN FUNCTION
+
+int main(){
+    //call recursive function
+    printRange(-2, 10);
+}
+
+*/
+
+
+
+/*
+!TASK B MAIN FUNCTION
+
+int main(){
+    int left;
+    int right;
+
+//Test #1
+    int x = sumRange(1, 3);
+    std::cout << "This is " << x << std::endl;
+
+//Test #2
+    int y = sumRange(-2, 10);
+    std::cout << "This is " << y << std::endl;
+}
+
+*/
+
+
+
+/*
+!TASK C MAIN FUNCTION
 
 int main() {
 
@@ -83,34 +143,6 @@ int main() {
     std::cout << "Sum is " << sum2 << std::endl;  // Sum is 34
 
     delete[] arr;         // deallocate it
-}
-
-
-/*
-!TASK A MAIN FUNCTION
-
-int main(){
-    //call recursive function
-    printRange(-2, 10);
-}
-
-*/
-
-
-/*
-!TASK B MAIN FUNCTION
-
-int main(){
-    int left;
-    int right;
-
-//Test #1
-    int x = sumRange(1, 3);
-    std::cout << "This is " << x << std::endl;
-
-//Test #2
-    int y = sumRange(-2, 10);
-    std::cout << "This is " << y << std::endl;
 }
 
 */
