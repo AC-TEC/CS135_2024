@@ -15,6 +15,13 @@ TASK D: Write a program which returns true if all characters in the string are l
 
 TASK E: Write a program which returns true if the string is a sequence of nested parentheses: strings "", "()", "(())", "((()))"  are all correct sequences and should return true. 
         Any other symbols or mismatching parenthesis should make the function return false.
+
+TASK F: uses the function divisible which takes an array of prices and the size of the array as arguments, and returns true if the collection can be divided into two equal halves, and false otherwise.
+
+        divisibleHelper function is a recursive helper function that takes additional arguments leftSum, rightSum, and index, 
+        which keep track of the current sums of Alice's and Bob's shares, and the current index of the array.
+        The function returns true if a solution exists, and false otherwise.
+
 */
 #include <iostream>
 #include <string> //TASK D 
@@ -78,7 +85,7 @@ bool isAlphanumeric(std::string s){
 }
 
 
-//?TASK E
+//?TASK E (BONUS)
 bool nestedParens(std::string s) {
     if (s.empty()) { // base case: empty string is valid
         return true;
@@ -90,14 +97,65 @@ bool nestedParens(std::string s) {
 }
 
 
+//?TASK F (BONUS)
+bool divisibleHelper(int *prices, int size, int leftSum, int rightSum, int index) {
+    // Base case: If we have reached the end of the array, check if the sums are equal
+    if (index == size) {
+        return leftSum == rightSum;
+    }
 
-int main(){
-    std::string s;
-    std::cout << "Enter a string: ";
-    std::getline(std::cin, s);
+    // Recursive case: Try adding the current price to Alice's share and see if it is divisible
+    if (divisibleHelper(prices, size, leftSum + prices[index], rightSum, index + 1)) {
+        std::cout << "Alice gets item " << index << std::endl;
+        return true;
+    }
 
-//calls function
-    std::cout << nestedParens(s) << std::endl;
+    // Recursive case: Try adding the current price to Bob's share and see if it is divisible
+    if (divisibleHelper(prices, size, leftSum, rightSum + prices[index], index + 1)) {
+        std::cout << "Bob gets item " << index << std::endl;
+        return true;
+    }
+
+    // If neither of the above cases is successful, then there is no solution
+    return false;
+}
+
+int computeTotalSum(int *prices, int size, int index) {
+    // Base case: If we have reached the end of the array, return 0
+    if (index == size) {
+        return 0;
+    }
+
+    // Recursive case: Compute the sum by adding the current element to the sum of the remaining elements
+    return prices[index] + computeTotalSum(prices, size, index + 1);
+}
+
+bool divisible(int *prices, int size) {
+    // Compute the total sum of the prices recursively
+    int total = computeTotalSum(prices, size, 0);
+
+    // If the total sum is not even, then there is no solution
+    if (total % 2 != 0) {
+        return false;
+    }
+
+    // Call the recursive helper function
+    return divisibleHelper(prices, size, 0, 0, 0);
+}
+
+
+//!TASK F MAIN FUNCTION
+int main() {
+    int prices[] = {10, 15, 12, 18, 19, 17, 13, 35, 33};
+    int size = sizeof(prices) / sizeof(prices[0]);
+
+    if (divisible(prices, size)) {
+        std::cout << "The collection can be divided into two equal halves." << std::endl;
+    } else {
+        std::cout << "The collection cannot be divided into two equal halves." << std::endl;
+    }
+
+    return 0;
 }
 
 
@@ -176,4 +234,18 @@ int main(){
     std::cout << isAlphanumeric(s) << std::endl;
 }
 
+*/
+
+
+/*
+!TASK E MAIN FUNCTION
+
+int main(){
+    std::string s;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, s);
+
+//calls function
+    std::cout << nestedParens(s) << std::endl;
+}
 */
