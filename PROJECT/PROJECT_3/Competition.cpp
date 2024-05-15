@@ -30,8 +30,6 @@ void Competition::play(){
     int round = 1;
 
     //iterate as long as rabbit and tortoise don't reach the last block in lane
-    //(rabbit.getPosition() < lane.length() - 1) && (tor.getPosition() < lane.length() - 1)
-    //(rabbit.getPosition() < last_block) && (tor.getPosition() < last_block)
     while((rabbit.getPosition() < last_block) && (tor.getPosition() < last_block)){
 
         //move rabbit (HARE)
