@@ -106,6 +106,6 @@ void Hare::setPosition(int position){
 
 //!Function to get values from patterns vector (for testing purposes)
 
-std::vector<int> Hare::getPatterns() const {
-    return patterns;
-}
+//std::vector<int> Hare::getPatterns() const {
+    //return patterns;
+//}
