@@ -70,6 +70,7 @@ What is the value of 1 / 2 * 5.6 in C++?
 1 / 11.2 = 0 (final answer)
 
 test explaination: says from left to right so division first then multiply
+if so then: 1/2 = 0 then 0 * 5.6 = 0
 
 my little sample
 #include <iostream>
@@ -108,6 +109,9 @@ Given int arr[] = {4, 3, 2, 1}; What is the value of *(arr + 1)?
 !answer:
 
 we know that *(index) means we are accessing the array/vector at the address(index) given
+
+if there is an operation outside of the "index" portion means it will affect the number at the position
+ex: *(arr+1) + 2 -> arr[1] + 2 -> 3+2 = 5
 
 *(arr + 1) -> arr[1] -> array at index 1
 
@@ -349,7 +353,7 @@ bool isStringandDigit(std::string input_string){
 
     //iterate through string
     for(int i = 0; i < input_string.length();i++){
-        //check if we have a string and a digit
+        //check if we have a character and a digit in the string
         if(isalpha(input_string[i])){
             character++;
         }
@@ -568,7 +572,7 @@ positive. If parameter salary is not positive, set data member salary to be 1000
 //additional private data member is double salary (in subclass not in base class)
 //parameters: name(string) and age (int) and salary(double)
 
-//whwen says can invoke corresponding constructor of its super class means to use the default constructor when creating the non-default of Employee
+//when says can invoke corresponding constructor of its super class means to use the default constructor when creating the non-default of Employee
 //the thing above makes it so that we have already a name and age set which would be a default person age and name so we only have to set the salary data member
 Employee::Employee(std::string name, int age, double salary) : Person(name,age) {
     //the name and age are set due to invoking the default constructor of base class person
@@ -597,11 +601,11 @@ std::string Employee::toString() const{
     std::string default_name_age = Person::toString();  //makes it so we have a string with the name and age as a string stored in this variable
 
     //add salary as a string to the string that already has name and age as a string
-    str += "Salary: " + to_string(salary) + "\n"; //to_string to convert number to string
+    default_name_age += "Salary: " + to_string(salary) + "\n"; //to_string to convert number to string
 
-    //returns the string with name,age,salary()new
+    //returns the string with name,age,salary(new thing we added)
 
-    return str;
+    return default_name_age;
 }
 
 */
@@ -637,5 +641,26 @@ bool isPalindrome(string* arr, int size) {
 
     return arr[0] == arr[size-1] && isPalindrome(arr+1, size-2);
 }
+
+
+*explainantion:
+
+palidrome is when we can read the strings from left to right and right to left the same
+
+
+base class
+if (size <= 1)
+bc if size is 1 or less than one its automatically a palidrome
+
+
+return arr[0] == arr[size-1] && isPalindrome(arr+1, size-2);
+bc arr[0] == arr[size-1] checks if the leftmost and rightmost strings are the same 
+isPalindrome(arr+1, size-2) checks if the the next leftmost and rightmost strings are the same
+
+
+essentially it will go from outwards to inwards since it first checks the outward strings then checks the next strings (inward)
+which will happen recursivly
+
+so checks outward then inward and its all done recursivly
 
 */
